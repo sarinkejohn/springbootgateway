@@ -1,4 +1,19 @@
-# springbootgateway
+# SpringBoot Gateway [SBG] - with headers validations
+# Request Payload
+curl --location 'http://localhost:9090/v2/fund-transfer' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI...' \
+--header 'Content-Type: application/json' \
+--header 'Channel: SAMONEY' \
+--header 'AppId: SAMONEY' \
+--header 'AppVersion: 1.0.0' \
+--header 'RequestId: IM251811N38P' \
+--data '{
+"service": "DEVOPS_INTERVIEW",
+"name": "NBC BANK TANZANIA",
+"amount": "103000",
+"account": "AC1234567890",
+"reference": "REF098765"
+}'
 # Read Me First
 The following was discovered as part of building this project:
 

@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Request Schema",
+  "type": "object",
+  "properties": {
+    "Channel": {
+      "type": "string",
+      "maxLength": 8,
+      "enum": ["MOBILEMONEY", "BANKAPP", "SWIFTY"],
+      "description": "Channel of the request (SAMONEY, BANKAPP, SWIFTY)"
+    },
+    "AppId": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "Application ID (SAMONEY, BANKAPP, SWIFTY etc.)"
+    },
+    "AppVersion": {
+      "type": "string",
+      "maxLength": 10,
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Version of the application (e.g. 1.0.0)"
+    },
+    "RequestId": {
+      "type": "string",
+      "maxLength": 36,
+      "description": "Unique reference id for the request"
+    }
+  },
+  "required": ["Channel", "AppId", "AppVersion", "RequestId"],
+  "additionalProperties": false,
+  "definitions": {
+    "headers": {
+      "type": "object",
+      "properties": {
+        "Authorization": {
+          "type": "string",
+          "pattern": "^Bearer\\s+.+$"
+        },
+        "Content-Type": {
+          "type": "string",
+          "enum": ["application/json"]
+        },
+        "Channel": {
+          "type": "string",
+          "enum": ["SAMONEY", "BANKAPP", "SWIFTY"]
+        },
+        "AppId": {
+          "type": "string",
+          "maxLength": 10
+        },
+        "AppVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "RequestId": {
+          "type": "string",
+          "maxLength": 36
+        }
+      },
+      "required": [
+        "Authorization",
+        "Content-Type",
+        "Channel",
+        "AppId",
+        "AppVersion",
+        "RequestId"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
