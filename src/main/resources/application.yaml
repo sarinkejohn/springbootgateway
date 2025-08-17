@@ -1,0 +1,26 @@
+server:
+  port: 9090
+logging:
+  level:
+    dev.sarinkejohn.gateway.filter: DEBUG
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: fund-transfer-route
+              uri: http://localhost:8080
+              predicates:
+                - Path=/v2/fund-transfer/**
+              filters:
+                  - RewritePath=/v2/fund-transfer/?(.*), /nbc-bank/devops/v1/transactions
+                  - AddResponseHeader=X-Powered-By, sarinkeJohn Gateway Service
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"      # exposes all endpoints be careful with this
+  endpoint:
+    health:
+      show-details: always
